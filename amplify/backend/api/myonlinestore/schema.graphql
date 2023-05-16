@@ -1,0 +1,19 @@
+type Book 
+@model
+@auth (rules: [
+
+{allow: groups, groups: ["admin"]},
+{allow: groups, groups: ["user"], operations: [read]}
+]) {
+  id: ID!
+  title: String!
+  description: String
+  price: Float!
+  authord: String!
+}
+
+type Order @model {
+  id: ID!
+  books: [Book] @connection
+  total: Float!
+}
